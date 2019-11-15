@@ -3,6 +3,7 @@ import ContextApp from "./context/ContextApp";
 import Count from "./reducer/Count";
 import Count2 from "./reducer/Count2";
 import Fetch from "./fetch";
+import Fetch2 from "./fetch/fetch2";
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
       <Count />
       <hr />
       <Count2 />
+      <hr />
+      <Fetch2 />
+
       <hr />
       <Fetch />
     </div>
