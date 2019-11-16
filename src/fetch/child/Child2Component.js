@@ -3,9 +3,7 @@ import { DataContext } from "../fetch2";
 
 function Child2Component() {
   const data = useContext(DataContext);
-  useEffect(() => {
-    console.log(data);
-  }, []);
+  useEffect(() => {}, []);
 
   const showData = data => {
     return data.map(res => {
