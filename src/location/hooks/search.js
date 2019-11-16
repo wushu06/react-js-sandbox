@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import { TokenContext } from "../App";
 
 export const store = {
   state: {
@@ -15,15 +16,15 @@ export const store = {
     }
     this.setters.forEach(setter => setter(this.state));
   },
-  setters: []
+  setters: [],
+  token: null
 };
 
 // Bind the setState function to the store object so
 // we don't lose context when calling it elsewhere
 store.setState = store.setState.bind(store); // so we can use this.state
-
 function axiosCall(term, url) {
-  if (term === "") {
+  if (term === "" && !store.token) {
     return;
   }
   let href = !url
@@ -34,6 +35,8 @@ function axiosCall(term, url) {
 }
 // this is the custom hook we'll call on components.
 export function useStore() {
+  store.token = useContext(TokenContext);
+
   const [state, set] = useState(store.state);
 
   if (!store.setters.includes(set)) {

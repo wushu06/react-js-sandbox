@@ -3,14 +3,22 @@ import Select from "./components/Select";
 import Listing from "./components/Listing";
 import Trait from "./components/Trait";
 import Production from "./components/Production";
+import useToken from "./hooks/token";
+export const TokenContext = React.createContext();
+
 const App = () => {
+  const [token] = useToken(10);
   return (
     <div>
       <h2>location collective</h2>
-      <Select />
-      <Trait />
-      <Production />
-      <Listing />
+      {token && (
+        <TokenContext.Provider value={token}>
+          <Select />
+          <Trait />
+          <Production />
+          <Listing />
+        </TokenContext.Provider>
+      )}
     </div>
   );
 };
