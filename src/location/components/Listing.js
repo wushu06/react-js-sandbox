@@ -9,11 +9,12 @@ const index = () => {
     let result = [];
     data.payload &&
       data.payload.then(res => {
-        if (typeof res.data === "object") {
+        if (!res.data.length) {
           result.push(res.data);
         } else {
           result = res.data;
         }
+        console.log(res.data.length);
         setResult(result);
       });
   }, [data]);

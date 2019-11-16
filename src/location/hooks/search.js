@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { TokenContext } from "../App";
 
@@ -17,7 +17,8 @@ export const store = {
     this.setters.forEach(setter => setter(this.state));
   },
   setters: [],
-  token: null
+  token: null,
+  check: false
 };
 
 // Bind the setState function to the store object so
@@ -27,8 +28,12 @@ function axiosCall(term, url) {
   if (term === "" && !store.token) {
     return;
   }
+  let userUrl = !store.check
+    ? "https://jsonplaceholder.typicode.com/todos/"
+    : `https://jsonplaceholder.typicode.com/todos/${term}`;
+
   let href = !url
-    ? `https://jsonplaceholder.typicode.com/todos/${term}`
+    ? userUrl
     : `https://jsonplaceholder.typicode.com/photos/${term}`;
 
   return axios.get(href);
@@ -38,6 +43,15 @@ export function useStore() {
   store.token = useContext(TokenContext);
 
   const [state, set] = useState(store.state);
+  useEffect(() => {
+    window.addEventListener("printerstatechanged", e => {
+      store.check = e.detail;
+    });
+  }, []);
+
+  useEffect(() => {
+    return () => {};
+  }, []);
 
   if (!store.setters.includes(set)) {
     store.setters.push(set);
