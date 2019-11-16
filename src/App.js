@@ -4,6 +4,7 @@ import Count from "./reducer/Count";
 import Count2 from "./reducer/Count2";
 import Fetch from "./fetch";
 import Fetch2 from "./fetch/fetch2";
+import CustomCount from "./custom";
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
       <ContextApp />
       <h2>useReducer</h2>
       <Count />
+      <hr />
+      <CustomCount />
       <hr />
       <Count2 />
       <hr />
