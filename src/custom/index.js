@@ -5,7 +5,7 @@ import CountTwo from "./countTwo";
 const countOne = () => {
   return (
     <div>
-      <h2>Custom hook count:</h2>
+      <h2>Shared count:</h2>
 
       <CountOne />
       <CountTwo />
